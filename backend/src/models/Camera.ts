@@ -2,12 +2,12 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
 
 export class Camera extends Model {
-  public id!: number;
-  public name!: string;
-  public status!: string; // Active, Lost Connection, In Deployment
-  public latitude!: number;
-  public longitude!: number;
-  public image!: string; // Image URL
+  declare id: number;
+  declare name: string;
+  declare status: string; // Active, Lost Connection, In Deployment
+  declare latitude: number;
+  declare longitude: number;
+  declare image: string; // Image URL
 }
 
 Camera.init(

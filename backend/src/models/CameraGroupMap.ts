@@ -4,8 +4,8 @@ import { Camera } from "./Camera";
 import { CameraGroup } from "./CameraGroup";
 
 export class CameraGroupMap extends Model {
-  public cameraId!: number;
-  public groupId!: number;
+  declare cameraId: number;
+  declare groupId: number;
 }
 
 CameraGroupMap.init(

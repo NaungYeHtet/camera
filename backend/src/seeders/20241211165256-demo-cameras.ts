@@ -1,4 +1,6 @@
-import { QueryInterface, Sequelize, DataTypes } from "sequelize";
+import { QueryInterface, Sequelize } from "sequelize";
+import * as fs from "fs";
+import * as path from "path";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -6,38 +8,27 @@ module.exports = {
     queryInterface: QueryInterface,
     sequelize: Sequelize
   ): Promise<void> {
-    await queryInterface.bulkInsert("Cameras", [
-      {
-        id: 1,
-        name: "Camera 1",
-        department: "Security",
-        status: "active",
-        longitude: 103.851959,
-        latitude: 1.29027,
-        image: "https://example.com/camera1.jpg",
-        remarks: "Main gate camera",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
-        name: "Camera 2",
-        department: "Traffic",
-        status: "lost_connection",
-        longitude: 103.861959,
-        latitude: 1.30027,
-        image: "https://example.com/camera2.jpg",
-        remarks: "Street intersection camera",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ]);
+    const cameraData = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "./data/cameraData.json"), "utf8")
+    );
+
+    // const formattedCameraData = cameraData.map((camera: any) => {
+    //   return {
+    //     ...camera,
+    //     createdAt: new Date(camera.createdAt).toISOString(),
+    //     updatedAt: new Date(camera.updatedAt).toISOString(),
+    //   };
+    // });
+
+    // Bulk insert data into the Cameras table
+    await queryInterface.bulkInsert("Cameras", cameraData);
   },
 
   async down(
     queryInterface: QueryInterface,
     sequelize: Sequelize
   ): Promise<void> {
+    // Delete all records from the Cameras table
     await queryInterface.bulkDelete("Cameras", {}, {});
   },
 };
