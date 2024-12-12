@@ -7,7 +7,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
     <>
       <Navbar />
       <Sidebar />
-      <main className="ml-[230px] mt-16 pl-4">{children}</main>
+      <main className="ml-[230px] mt-16 px-6">{children}</main>
       {/* <AppFooter /> */}
     </>
   );

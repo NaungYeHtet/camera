@@ -1,14 +1,11 @@
-import dynamic from "next/dynamic";
-
-const Map = dynamic(() => import("../components/map/Map"), {
-  ssr: false,
-});
+import MapCard from "./map-card";
 
 export default function Home() {
   return (
-    <>
-      <h3>Map</h3>
-      <Map position={[51.505, -0.09]} zoom={13} />
-    </>
+    <div className="flex">
+      <div className="flex flex-col bg-gray-600 p-4 rounded-md w-full">
+        <MapCard />
+      </div>
+    </div>
   );
 }

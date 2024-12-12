@@ -22,8 +22,8 @@ Camera.init(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM("Active", "Lost Connection", "In Deployment"),
-      defaultValue: "In Deployment",
+      type: DataTypes.ENUM("Active", "Lost Connection", "Under Deployment"),
+      defaultValue: "Under Deployment",
     },
     latitude: {
       type: DataTypes.FLOAT,
