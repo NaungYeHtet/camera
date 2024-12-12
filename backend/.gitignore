@@ -1,0 +1,49 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+
+# TypeScript build output
+dist/
+build/
+*.tsbuildinfo
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and coverage reports
+logs/
+*.log
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Linting and formatting
+.eslintcache
+.prettiercache
+
+# Optional lock files (if not committed)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# PM2 process manager
+pm2/logs/
+pm2/pids/
+pm2/dump.pm2
