@@ -1,8 +1,14 @@
+"use client";
+
 import useCameraStatus from "@/hooks/useCameraStatus";
 import { Icon } from "leaflet";
 import { CircleMarker, Marker, Popup } from "react-leaflet";
 
-const getCameraStatusColor = (status?: CameraStatus) => {
+const getCameraStatusColor = (status: CameraStatus, isSelected: boolean) => {
+  if (isSelected) {
+    return "purple";
+  }
+
   switch (status) {
     case "Active":
       return "green";
@@ -10,21 +16,15 @@ const getCameraStatusColor = (status?: CameraStatus) => {
       return "orange";
     case "Lost Connection":
       return "red";
-    default:
-      return "blue";
   }
 };
 
-const getCameraBorderColor = (isSelected: boolean, hasAlerts: boolean) => {
-  if (isSelected) {
-    return "purple";
-  }
-
+const getCameraBorderColor = (hasAlerts: boolean) => {
   if (hasAlerts) {
     return "red";
   }
 
-  return "gray";
+  return "transparent";
 };
 
 type CameraIndicatorProps = {
@@ -46,11 +46,13 @@ export default function CameraIndicator({
       <CircleMarker
         key={`${camera.id}-${isSelected}-${status}`}
         center={[camera.latitude, camera.longitude]}
-        opacity={1}
         fillOpacity={1}
-        color={getCameraBorderColor(isSelected, camera.hasAlerts)}
+        color={getCameraBorderColor(camera.hasAlerts)}
+        opacity={0.3}
         radius={15}
-        fillColor={getCameraStatusColor(status || camera.status)}
+        weight={12}
+        stroke
+        fillColor={getCameraStatusColor(status || camera.status, isSelected)}
       >
         <Popup>
           <b>{camera.name}</b> <br />

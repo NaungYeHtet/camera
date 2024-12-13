@@ -5,6 +5,12 @@ import { Camera } from "./Camera";
 export class CameraAlert extends Model {
   declare id: number;
   declare cameraId: number;
+  declare isActive: boolean;
+  declare type:
+    | "Fire Alert"
+    | "Intrusion Alert"
+    | "Weather Alert"
+    | "Smoke Alert";
   declare datetime: string;
 }
 
@@ -22,6 +28,20 @@ CameraAlert.init(
         model: Camera,
         key: "id",
       },
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.ENUM(
+        "Fire Alert",
+        "Intrusion Alert",
+        "Weather Alert",
+        "Smoke Alert"
+      ),
+      allowNull: false,
     },
     datetime: {
       type: DataTypes.STRING,

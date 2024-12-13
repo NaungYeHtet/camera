@@ -19,7 +19,7 @@ export default function Navbar({ isOpen, toggleSidebar }: NavbarProps) {
         <CiMenuBurger />
       </button>
 
-      <Link href={"/setting"}>
+      <Link href={"/settings"}>
         <CiSettings />
       </Link>
     </nav>

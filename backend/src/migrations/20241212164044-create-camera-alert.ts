@@ -14,6 +14,14 @@ module.exports = {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
       },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       time: {
         type: DataTypes.DATE,
       },

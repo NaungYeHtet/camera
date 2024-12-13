@@ -20,7 +20,7 @@ export default function MapStat({ cameras, totalAlerts }: MapStatsProps) {
         <GoAlert size={30} className="text-red-500" />
         <div className="flex flex-col">
           <span className="text-red-500 font-bold">{totalAlerts}</span>
-          <p>Alerts</p>
+          <p>Active Alert</p>
         </div>
       </div>
     </div>

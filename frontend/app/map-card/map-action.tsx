@@ -55,18 +55,20 @@ export default function MapAction({
       return;
     }
 
-    console.log(cameraIds);
     setLoading(true);
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:4000/api/group`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cameraIds: Array.from(cameraIds) }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_PATH}/group`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cameraIds: Array.from(cameraIds) }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch group");
@@ -88,13 +90,16 @@ export default function MapAction({
 
   const handleCreateGroup: SubmitHandler<GroupInputs> = async (data) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/groups`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cameraIds: Array.from(cameraIds), ...data }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_PATH}/groups`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cameraIds: Array.from(cameraIds), ...data }),
+        }
+      );
 
       if (response.status == 422) {
         setError("name", { type: "custom", message: "Group name is required" });
@@ -114,7 +119,7 @@ export default function MapAction({
   };
 
   const handleDeleteGroup = () => {
-    fetch(`http://localhost:4000/api/groups/${group?.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_PATH}/groups/${group?.id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -194,7 +199,7 @@ export default function MapAction({
       ) : (
         ""
       )}
-      <div className="bg-gray-600 p-3 flex flex-col gap-2 text-xs md:text-sm">
+      <div className="bg-gray-600 p-3 flex flex-col gap-2 text-xs md:text-sm rounded-md shadow-lg">
         <div className="inline-flex items-center gap-3">
           <span>{cameraIds.size} CAMERA SELECTED</span>
           <button
@@ -217,9 +222,17 @@ export default function MapAction({
         {cameraIds.size > 0 && (
           <div className="mt-2">
             <img
-              src={cameras[0].image}
-              alt={cameras[0].name}
-              className="w-32 h-24 object-cover rounded-md"
+              src={
+                cameras.filter(
+                  (camera) => camera.id == Array.from(cameraIds)[0]
+                )[0].image
+              }
+              alt={
+                cameras.filter(
+                  (camera) => camera.id == Array.from(cameraIds)[0]
+                )[0].name
+              }
+              className="w-44 h-24 object-cover rounded-md"
             />
           </div>
         )}

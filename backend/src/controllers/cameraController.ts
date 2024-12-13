@@ -42,7 +42,7 @@ export const getAllCameras = async (req: Request, res: Response) => {
         },
         {
           model: CameraAlert,
-          attributes: ["id"], // Only fetch the alert IDs to determine `hasAlerts`
+          attributes: ["id", "isActive"], // Only fetch the alert IDs to determine `hasAlerts`
         },
       ],
     });
@@ -50,10 +50,19 @@ export const getAllCameras = async (req: Request, res: Response) => {
     let totalAlerts = 0;
 
     const camerasWithAlerts = cameras.map((camera) => {
-      const alertsCount = camera.CameraAlerts ? camera.CameraAlerts.length : 0;
+      const activeAlerts = camera.CameraAlerts?.filter(
+        (alert) => alert.isActive
+      );
+
+      const alertsCount = activeAlerts ? activeAlerts.length : 0;
+
       totalAlerts += alertsCount;
+
+      const imageUrl = `${process.env.APP_URL}/uploads/${camera.image}`;
+
       return {
         ...camera.toJSON(),
+        image: imageUrl,
         hasAlerts: alertsCount > 0,
       };
     });

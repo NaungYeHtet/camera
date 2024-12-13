@@ -6,9 +6,11 @@ import debounce from "lodash.debounce";
 import MapStat from "./map-stat";
 import MapFilter from "./map-filter";
 import MapAction from "./map-action";
-import CameraIndicator from "./camera-indicator";
 
 const Map = dynamic(() => import("../../components/map/Map"), {
+  ssr: false,
+});
+const CameraIndicator = dynamic(() => import("./camera-indicator"), {
   ssr: false,
 });
 
@@ -27,7 +29,7 @@ export default function MapCard() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:4000/api/cameras?search=${query}`
+        `${process.env.NEXT_PUBLIC_API_PATH}/cameras?search=${query}`
       );
       const {
         cameras,
@@ -36,9 +38,11 @@ export default function MapCard() {
 
       setCameras(cameras);
       setTotalAlerats(totalAlerts);
+      console.log(cameras);
 
       if (cameras.length > 0) {
         setPosition([cameras[0].latitude, cameras[0].longitude]);
+        console.log(cameras[0].latitude, cameras[0].longitude);
       }
     } catch (error) {
       console.error("Error fetching camera data:", error);
@@ -48,7 +52,6 @@ export default function MapCard() {
   };
 
   const handleMarkerClick = (cameraId: number) => {
-    console.log(cameraId);
     setSelectedCameraIds((prev) => {
       const newSelectedIds = new Set(prev);
       if (newSelectedIds.has(cameraId)) {
@@ -83,16 +86,20 @@ export default function MapCard() {
         {loading && (
           <div className="absolute top-10 left-10 text-white">Loading...</div>
         )}
-        <Map position={position} zoom={13}>
-          {cameras.map((camera) => (
-            <CameraIndicator
-              key={camera.id}
-              camera={camera}
-              selectedCameraIds={selectedCameraIds}
-              handleMarkerClick={handleMarkerClick}
-            />
-          ))}
-        </Map>
+        {cameras.length > 0 ? (
+          <Map position={position} zoom={13}>
+            {cameras.map((camera) => (
+              <CameraIndicator
+                key={camera.id}
+                camera={camera}
+                selectedCameraIds={selectedCameraIds}
+                handleMarkerClick={handleMarkerClick}
+              />
+            ))}
+          </Map>
+        ) : (
+          ""
+        )}
         <MapAction
           cameraIds={selectedCameraIds}
           cameras={cameras}

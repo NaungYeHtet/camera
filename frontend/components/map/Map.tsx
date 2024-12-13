@@ -19,8 +19,8 @@ export default function Map({ zoom, position, children }: MapProps) {
       zoom={zoom}
       scrollWheelZoom={false}
       style={{
-        width: "100%", // Use 100% of the container's width
-        height: "60vh", // Use 60% of the viewport height (adjust this value to suit your design)
+        width: "100%",
+        height: "60vh",
       }}
       zoomControl={false}
     >

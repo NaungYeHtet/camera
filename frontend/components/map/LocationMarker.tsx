@@ -6,6 +6,7 @@ export default function LocationMarker() {
   const [position, setPosition] = useState(null);
   const map = useMapEvents({
     click(e: any) {
+      console.log(e.latlng.lat, e.latlng.lng);
       setPosition(e.latlng);
     },
   });

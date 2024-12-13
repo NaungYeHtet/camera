@@ -24,8 +24,8 @@ export default function SidebarItem({
     <li>
       <Link
         href={href}
-        className={cn("flex items-center p-2 hover:text-red-700 rounded-md", {
-          "bg-red-600 text-gray-200": pathname == href,
+        className={cn("flex items-center p-2 hover:text-red-900 rounded-md", {
+          "bg-red-600 text-gray-200 hover:text-red-200": pathname == href,
         })}
       >
         <span className="mr-2">{icon}</span>

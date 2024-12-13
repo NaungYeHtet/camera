@@ -8,8 +8,6 @@ import {
 import sequelize from "../config/database";
 import { Department } from "./Department";
 import { CameraAlert } from "./CameraAlert";
-import { CameraGroup } from "./CameraGroup";
-import { CameraGroupMap } from "./CameraGroupMap";
 
 export class Camera extends Model<
   InferAttributes<Camera>,
@@ -18,7 +16,7 @@ export class Camera extends Model<
   declare id: number;
   declare departmentId: number;
   declare name: string;
-  declare status: string;
+  declare status: "Active" | "Lost Connection" | "Under Deployment";
   declare latitude: number;
   declare longitude: number;
   declare image: string;

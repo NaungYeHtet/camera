@@ -4,12 +4,19 @@ import Image from "next/image";
 import avatar from "../../public/avatar.svg";
 import { GrDashboard } from "react-icons/gr";
 import SidebarItem, { SidbarItem } from "./sidebar-item";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { cn } from "@/utils";
 import { LiaTimesSolid } from "react-icons/lia";
+import { GoAlert } from "react-icons/go";
+import { BiCamera, BiCog, BiFolder } from "react-icons/bi";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 const items: SidbarItem[] = [
-  { title: "Dashboard", href: "/", icon: <GrDashboard /> },
+  { title: "Dashboard", href: "/", icon: <MdOutlineSpaceDashboard /> },
+  { title: "Feeds", href: "/feeds", icon: <BiCamera /> },
+  { title: "Alerts", href: "/alerts", icon: <GoAlert /> },
+  { title: "Cases", href: "/cases", icon: <BiFolder /> },
+  { title: "Settings", href: "/settings", icon: <BiCog /> },
 ];
 
 type SidebarProps = {
@@ -42,7 +49,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
           width={50}
         />
       </div>
-      <ul className="flex flex-col mt-3">
+      <ul className="flex flex-col mt-3 gap-2">
         {items.map((item) => (
           <Fragment key={item.title}>
             <SidebarItem item={item} />
