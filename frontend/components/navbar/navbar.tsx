@@ -11,7 +11,7 @@ export default function Navbar({ isOpen, toggleSidebar }: NavbarProps) {
   return (
     <nav
       className={cn(
-        "fixed top-0 flex w-full justify-between bg-gray-700 p-3 transition-all",
+        "fixed top-0 flex w-full justify-between z-[5000] bg-gray-700 p-3 transition-all",
         isOpen ? "sm:pl-[240px]" : "pl-3"
       )}
     >

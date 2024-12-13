@@ -221,19 +221,20 @@ export default function MapAction({
         </ul>
         {cameraIds.size > 0 && (
           <div className="mt-2">
-            <img
-              src={
-                cameras.filter(
-                  (camera) => camera.id == Array.from(cameraIds)[0]
-                )[0].image
-              }
-              alt={
-                cameras.filter(
-                  (camera) => camera.id == Array.from(cameraIds)[0]
-                )[0].name
-              }
-              className="w-44 h-24 object-cover rounded-md"
-            />
+            {(() => {
+              const selectedCamera = cameras.find(
+                (camera) => camera.id === Array.from(cameraIds)[0]
+              );
+              return (
+                selectedCamera && (
+                  <img
+                    src={selectedCamera.image}
+                    alt={selectedCamera.name}
+                    className="w-44 h-24 object-cover rounded-md"
+                  />
+                )
+              );
+            })()}
           </div>
         )}
       </div>

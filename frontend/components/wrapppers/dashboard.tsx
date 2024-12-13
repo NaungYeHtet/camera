@@ -26,7 +26,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       <main
         className={cn(
-          "transition-all mt-16 px-6",
+          "transition-all mt-16 px-6 pb-12",
           isOpen ? "md:ml-[230px]" : "ml-0"
         )}
       >
