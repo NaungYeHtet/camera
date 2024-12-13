@@ -1,12 +1,24 @@
-import { SIDEBAR_WIDTH } from "@/utils/constants";
+import { cn } from "@/utils";
 import Link from "next/link";
-import { CiSettings } from "react-icons/ci";
+import { CiMenuBurger, CiSettings } from "react-icons/ci";
 
-export default function Navbar() {
+type NavbarProps = {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+};
+
+export default function Navbar({ isOpen, toggleSidebar }: NavbarProps) {
   return (
     <nav
-      className={`fixed top-0 flex w-full justify-end bg-gray-700 p-3 pl-[230px]`}
+      className={cn(
+        "fixed top-0 flex w-full justify-between bg-gray-700 p-3 transition-all",
+        isOpen ? "sm:pl-[240px]" : "pl-3"
+      )}
     >
+      <button onClick={toggleSidebar} className="inset-0 bg-black">
+        <CiMenuBurger />
+      </button>
+
       <Link href={"/setting"}>
         <CiSettings />
       </Link>

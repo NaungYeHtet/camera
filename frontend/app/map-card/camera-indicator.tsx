@@ -42,15 +42,24 @@ export default function CameraIndicator({
   const status = useCameraStatus(camera.id);
 
   return (
-    <CircleMarker
-      key={`${camera.id}-${isSelected}-${status}`}
-      center={[camera.latitude, camera.longitude]}
-      opacity={1}
-      fillOpacity={1}
-      color={getCameraBorderColor(isSelected, camera.hasAlerts)}
-      radius={15}
-      fillColor={getCameraStatusColor(status || camera.status)}
-    >
+    <>
+      <CircleMarker
+        key={`${camera.id}-${isSelected}-${status}`}
+        center={[camera.latitude, camera.longitude]}
+        opacity={1}
+        fillOpacity={1}
+        color={getCameraBorderColor(isSelected, camera.hasAlerts)}
+        radius={15}
+        fillColor={getCameraStatusColor(status || camera.status)}
+      >
+        <Popup>
+          <b>{camera.name}</b> <br />
+          Department: {camera.department} <br />
+          Status: {camera.status} <br />
+          Remarks: {camera.remarks}
+        </Popup>
+      </CircleMarker>
+
       <Marker
         position={[camera.latitude, camera.longitude]}
         icon={
@@ -61,16 +70,9 @@ export default function CameraIndicator({
           })
         }
         eventHandlers={{
-          click: () => handleMarkerClick(camera.id), // Add click event handler
+          click: () => handleMarkerClick(camera.id),
         }}
-      >
-        <Popup>
-          <b>{camera.name}</b> <br />
-          Department: {camera.department} <br />
-          Status: {camera.status} <br />
-          Remarks: {camera.remarks}
-        </Popup>
-      </Marker>
-    </CircleMarker>
+      />
+    </>
   );
 }

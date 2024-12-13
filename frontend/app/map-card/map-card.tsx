@@ -17,6 +17,11 @@ export default function MapCard() {
   const [position, setPosition] = useState<[number, number]>([0, 0]);
   const [selectedCameraIds, setSelectedCameraIds] = useState(new Set<number>());
   const [loading, setLoading] = useState(false);
+  const [totalAlerts, setTotalAlerats] = useState(0);
+
+  const handleSelectedCameraIds = (cameraIds: Set<number>) => {
+    setSelectedCameraIds(cameraIds);
+  };
 
   const fetchCameras = async (query: string) => {
     setLoading(true);
@@ -24,13 +29,16 @@ export default function MapCard() {
       const response = await fetch(
         `http://localhost:4000/api/cameras?search=${query}`
       );
-      const data: Camera[] = await response.json();
+      const {
+        cameras,
+        totalAlerts,
+      }: { cameras: Camera[]; totalAlerts: number } = await response.json();
 
-      console.log(data);
-      setCameras(data);
+      setCameras(cameras);
+      setTotalAlerats(totalAlerts);
 
-      if (data.length > 0) {
-        setPosition([data[0].latitude, data[0].longitude]);
+      if (cameras.length > 0) {
+        setPosition([cameras[0].latitude, cameras[0].longitude]);
       }
     } catch (error) {
       console.error("Error fetching camera data:", error);
@@ -53,7 +61,7 @@ export default function MapCard() {
   };
 
   const debouncedSearch = useMemo(
-    () => debounce((query: string) => fetchCameras(query), 2000),
+    () => debounce((query: string) => fetchCameras(query), 1000),
     []
   );
 
@@ -69,7 +77,7 @@ export default function MapCard() {
 
   return (
     <div className="flex flex-col gap-3">
-      <MapStat cameras={cameras} />
+      <MapStat cameras={cameras} totalAlerts={totalAlerts} />
       <div className="relative">
         <MapFilter onSearch={debouncedSearch} />
         {loading && (
@@ -85,7 +93,11 @@ export default function MapCard() {
             />
           ))}
         </Map>
-        <MapAction cameraIds={selectedCameraIds} cameras={cameras} />
+        <MapAction
+          cameraIds={selectedCameraIds}
+          cameras={cameras}
+          handleCameraIds={handleSelectedCameraIds}
+        />
       </div>
     </div>
   );

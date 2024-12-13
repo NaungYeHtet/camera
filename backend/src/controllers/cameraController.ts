@@ -47,14 +47,21 @@ export const getAllCameras = async (req: Request, res: Response) => {
       ],
     });
 
+    let totalAlerts = 0;
+
     const camerasWithAlerts = cameras.map((camera) => {
+      const alertsCount = camera.CameraAlerts ? camera.CameraAlerts.length : 0;
+      totalAlerts += alertsCount;
       return {
         ...camera.toJSON(),
-        hasAlerts: camera.CameraAlerts && camera.CameraAlerts.length > 0,
+        hasAlerts: alertsCount > 0,
       };
     });
 
-    res.status(200).json(camerasWithAlerts);
+    res.status(200).json({
+      cameras: camerasWithAlerts,
+      totalAlerts,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Failed to fetch cameras" });

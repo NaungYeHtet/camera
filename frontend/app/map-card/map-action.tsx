@@ -7,10 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Dropdown from "@/components/dropdown";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { toast } from "react-toastify";
+import { LiaTimesSolid } from "react-icons/lia";
 
 type MapActionProps = {
   cameraIds: Set<number>;
   cameras: Camera[];
+  handleCameraIds: (cameraIds: Set<number>) => void;
 };
 
 type GroupInputs = {
@@ -27,7 +29,11 @@ const groupDefaults = {
   name: "",
 };
 
-export default function MapAction({ cameraIds, cameras }: MapActionProps) {
+export default function MapAction({
+  cameraIds,
+  cameras,
+  handleCameraIds,
+}: MapActionProps) {
   const [loading, setLoading] = useState(false);
   const [group, setGroup] = useState<CameraGroup | null>(null);
   const [isCreating, setIsCreating] = useState(false);
@@ -188,8 +194,16 @@ export default function MapAction({ cameraIds, cameras }: MapActionProps) {
       ) : (
         ""
       )}
-      <div className="bg-gray-600 p-3 flex flex-col">
-        <p className="text-sm">{cameraIds.size} CAMERA SELECTED</p>
+      <div className="bg-gray-600 p-3 flex flex-col gap-2 text-xs md:text-sm">
+        <div className="inline-flex items-center gap-3">
+          <span>{cameraIds.size} CAMERA SELECTED</span>
+          <button
+            className="dark:text-gray-300"
+            onClick={() => handleCameraIds(new Set())}
+          >
+            <LiaTimesSolid />
+          </button>
+        </div>
         <ul>
           {Array.from(cameraIds).map((cameraId) => {
             const camera = cameras.find((camera) => camera.id === cameraId);
@@ -205,7 +219,7 @@ export default function MapAction({ cameraIds, cameras }: MapActionProps) {
             <img
               src={cameras[0].image}
               alt={cameras[0].name}
-              className="w-32 h-32 object-cover rounded-md"
+              className="w-32 h-24 object-cover rounded-md"
             />
           </div>
         )}
