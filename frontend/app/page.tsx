@@ -1,4 +1,4 @@
-import MapCard from "./map-card";
+import MapCard from "./map-card/map-card";
 
 export default function Home() {
   return (

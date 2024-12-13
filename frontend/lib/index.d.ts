@@ -9,6 +9,7 @@ type Camera = {
   latitude: number;
   image: string;
   remarks: string;
+  hasAlerts: boolean;
 };
 
 type CameraGroup = {

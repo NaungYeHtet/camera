@@ -18,6 +18,7 @@ CameraGroupMap.belongsTo(CameraGroup, { foreignKey: "groupId" });
 CameraGroup.hasMany(CameraGroupMap, { foreignKey: "groupId" });
 Camera.hasMany(CameraGroupMap, { foreignKey: "cameraId" });
 Camera.belongsTo(Department);
+Camera.hasMany(CameraAlert);
 Department.hasMany(Camera);
 Camera.belongsToMany(CameraGroup, {
   through: CameraGroupMap,

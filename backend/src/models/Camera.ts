@@ -1,18 +1,29 @@
-import { DataTypes, Model } from "sequelize";
+import {
+  DataTypes,
+  HasManyGetAssociationsMixin,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
 import sequelize from "../config/database";
 import { Department } from "./Department";
 import { CameraAlert } from "./CameraAlert";
 import { CameraGroup } from "./CameraGroup";
 import { CameraGroupMap } from "./CameraGroupMap";
 
-export class Camera extends Model {
+export class Camera extends Model<
+  InferAttributes<Camera>,
+  InferCreationAttributes<Camera>
+> {
   declare id: number;
   declare departmentId: number;
   declare name: string;
-  declare status: string; // Active, Lost Connection, In Deployment
+  declare status: string;
   declare latitude: number;
   declare longitude: number;
-  declare image: string; // Image URL
+  declare image: string;
+  declare CameraAlerts?: CameraAlert[];
+  declare getCameraAlerts: HasManyGetAssociationsMixin<CameraAlert>;
 }
 
 Camera.init(

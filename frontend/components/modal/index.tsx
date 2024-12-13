@@ -33,7 +33,7 @@ const Title = ({ className, children }: TitleProps) => {
     <DialogTitle
       as="h3"
       className={cn(
-        "text-xl font-semibold text-gray-900 dark:text-gray-400",
+        "text-xl font-semibold text-gray-900 dark:text-gray-300",
         className
       )}
     >

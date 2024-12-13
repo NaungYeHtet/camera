@@ -132,10 +132,8 @@ export const createGroup = async (req: Request, res: Response) => {
       return;
     }
 
-    // Create the group
     const newGroup = await CameraGroup.create({ name });
 
-    // Map cameras to the group
     const cameraMappings = cameraIds.map((cameraId) => ({
       groupId: newGroup.id,
       cameraId,
@@ -154,9 +152,9 @@ export const createGroup = async (req: Request, res: Response) => {
 };
 
 export const deleteGroup = async (req: Request, res: Response) => {
-  const { groupId } = req.params; // Expecting groupId as a route parameter
+  const { groupId } = req.params;
 
-  const t = await sequelize.transaction(); // Start a transaction
+  const t = await sequelize.transaction();
 
   try {
     await CameraGroupMap.destroy({

@@ -30,6 +30,6 @@ CameraAlert.init(
   },
   {
     sequelize,
-    tableName: "Cameralerts",
+    tableName: "CameraAlerts",
   }
 );

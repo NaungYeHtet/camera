@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-import { Department, Camera, CameraGroup } from "../models";
+import { Department, Camera, CameraGroup, CameraAlert } from "../models";
 
 export const getAllCameras = async (req: Request, res: Response) => {
   try {
@@ -40,9 +40,21 @@ export const getAllCameras = async (req: Request, res: Response) => {
           through: { attributes: [] },
           attributes: [],
         },
+        {
+          model: CameraAlert,
+          attributes: ["id"], // Only fetch the alert IDs to determine `hasAlerts`
+        },
       ],
     });
-    res.status(200).json(cameras);
+
+    const camerasWithAlerts = cameras.map((camera) => {
+      return {
+        ...camera.toJSON(),
+        hasAlerts: camera.CameraAlerts && camera.CameraAlerts.length > 0,
+      };
+    });
+
+    res.status(200).json(camerasWithAlerts);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Failed to fetch cameras" });
