@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"; // Import the cors package
 import cameraRoutes from "./routes/cameraRoutes";
 import cameraGroupRoutes from "./routes/cameraGroupRoutes";
+import alertRoutes from "./routes/alertRoutes";
 import sequelize from "./config/database";
 import path from "path";
 
@@ -22,6 +23,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 // Routes
 app.use("/api", cameraRoutes);
 app.use("/api", cameraGroupRoutes);
+app.use("/api", alertRoutes);
 
 // Database connection
 sequelize.sync().then(() => console.log("Database connected"));
