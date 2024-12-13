@@ -10,3 +10,8 @@ type Camera = {
   image: string;
   remarks: string;
 };
+
+type CameraGroup = {
+  id: number;
+  name: string;
+};

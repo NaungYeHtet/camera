@@ -30,8 +30,6 @@ CameraAlert.init(
   },
   {
     sequelize,
-    tableName: "camera_alerts",
+    tableName: "Cameralerts",
   }
 );
-
-CameraAlert.belongsTo(Camera);

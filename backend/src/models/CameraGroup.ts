@@ -20,6 +20,6 @@ CameraGroup.init(
   },
   {
     sequelize,
-    tableName: "camera_groups",
+    tableName: "CameraGroups",
   }
 );

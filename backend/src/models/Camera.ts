@@ -2,6 +2,8 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
 import { Department } from "./Department";
 import { CameraAlert } from "./CameraAlert";
+import { CameraGroup } from "./CameraGroup";
+import { CameraGroupMap } from "./CameraGroupMap";
 
 export class Camera extends Model {
   declare id: number;
@@ -51,8 +53,6 @@ Camera.init(
   },
   {
     sequelize,
-    tableName: "cameras",
+    tableName: "Cameras",
   }
 );
-
-Camera.belongsTo(Department);

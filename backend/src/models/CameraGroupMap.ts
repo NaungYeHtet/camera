@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
-import { Camera } from "./Camera";
 import { CameraGroup } from "./CameraGroup";
+import { Camera } from "./Camera";
 
 export class CameraGroupMap extends Model {
   declare cameraId: number;
@@ -29,9 +29,6 @@ CameraGroupMap.init(
   },
   {
     sequelize,
-    tableName: "camera_group_mapping",
+    tableName: "CameraGroupMaps",
   }
 );
-
-Camera.belongsToMany(CameraGroup, { through: CameraGroupMap });
-CameraGroup.belongsToMany(Camera, { through: CameraGroupMap });

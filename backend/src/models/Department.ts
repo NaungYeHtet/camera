@@ -22,6 +22,6 @@ Department.init(
   },
   {
     sequelize,
-    tableName: "departments",
+    tableName: "Departments",
   }
 );

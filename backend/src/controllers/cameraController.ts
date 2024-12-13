@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { Camera } from "../models/Camera";
 import { Op } from "sequelize";
-import { Department } from "../models/Department";
+import { Department, Camera, CameraGroup } from "../models";
 
 export const getAllCameras = async (req: Request, res: Response) => {
   try {
@@ -20,6 +19,11 @@ export const getAllCameras = async (req: Request, res: Response) => {
                 [Op.like]: `%${search}%`, // Join with Department and search by name
               },
             },
+            {
+              "$CameraGroups.name$": {
+                [Op.like]: `%${search}%`, // Search by group name
+              },
+            },
           ],
         }
       : {};
@@ -29,6 +33,11 @@ export const getAllCameras = async (req: Request, res: Response) => {
       include: [
         {
           model: Department,
+          attributes: [],
+        },
+        {
+          model: CameraGroup,
+          through: { attributes: [] },
           attributes: [],
         },
       ],

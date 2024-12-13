@@ -11,10 +11,11 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
       },
       departmentID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
