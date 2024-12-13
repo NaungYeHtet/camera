@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sequelize": "sequelize --require ts-node/register",
+    "sequelize": "sequelize-cli",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/server.ts",
     "lint": "eslint 'src/**/*.ts'",
