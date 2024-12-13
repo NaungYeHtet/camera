@@ -13,10 +13,10 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      name: {
-        type: DataTypes.STRING,
+      departmentID: {
+        type: DataTypes.INTEGER,
       },
-      department: {
+      name: {
         type: DataTypes.STRING,
       },
       status: {

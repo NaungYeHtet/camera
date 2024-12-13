@@ -1,8 +1,11 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/database";
+import { Department } from "./Department";
+import { CameraAlert } from "./CameraAlert";
 
 export class Camera extends Model {
   declare id: number;
+  declare departmentId: number;
   declare name: string;
   declare status: string; // Active, Lost Connection, In Deployment
   declare latitude: number;
@@ -16,6 +19,14 @@ Camera.init(
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
+    },
+    departmentId: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: Department,
+        key: "id",
+      },
     },
     name: {
       type: DataTypes.STRING,
@@ -43,3 +54,5 @@ Camera.init(
     tableName: "cameras",
   }
 );
+
+Camera.belongsTo(Department);

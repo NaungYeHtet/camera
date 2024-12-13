@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Camera } from "../models/Camera";
 import { Op } from "sequelize";
+import { Department } from "../models/Department";
 
 export const getAllCameras = async (req: Request, res: Response) => {
   try {
@@ -15,8 +16,8 @@ export const getAllCameras = async (req: Request, res: Response) => {
               },
             },
             {
-              department: {
-                [Op.like]: `%${search}%`, // Use LIKE for department search as well
+              "$Department.name$": {
+                [Op.like]: `%${search}%`, // Join with Department and search by name
               },
             },
           ],
@@ -25,6 +26,12 @@ export const getAllCameras = async (req: Request, res: Response) => {
 
     const cameras = await Camera.findAll({
       where: whereClause,
+      include: [
+        {
+          model: Department,
+          attributes: [],
+        },
+      ],
     });
     res.status(200).json(cameras);
   } catch (error) {

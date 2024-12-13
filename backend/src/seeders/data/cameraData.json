@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
+    "departmentId": 1,
     "name": "Camera 1",
-    "department": "Security",
     "status": "Active",
     "longitude": 103.851959,
     "latitude": 1.29027,
@@ -13,8 +13,8 @@
   },
   {
     "id": 2,
+    "departmentId": 2,
     "name": "Camera 2",
-    "department": "Traffic",
     "status": "Lost Connection",
     "longitude": 103.861959,
     "latitude": 1.30027,
@@ -25,8 +25,8 @@
   },
   {
     "id": 3,
+    "departmentId": 3,
     "name": "Camera 3",
-    "department": "Security",
     "status": "Under Deployment",
     "longitude": 103.871959,
     "latitude": 1.31027,
@@ -37,8 +37,8 @@
   },
   {
     "id": 4,
+    "departmentId": 2,
     "name": "Camera 4",
-    "department": "Surveillance",
     "status": "Active",
     "longitude": 103.881959,
     "latitude": 1.32027,
@@ -49,8 +49,8 @@
   },
   {
     "id": 5,
+    "departmentId": 3,
     "name": "Camera 5",
-    "department": "Security",
     "status": "Active",
     "longitude": 103.891959,
     "latitude": 1.33027,
@@ -61,8 +61,8 @@
   },
   {
     "id": 6,
+    "departmentId": 1,
     "name": "Camera 6",
-    "department": "Traffic",
     "status": "Under Deployment",
     "longitude": 103.901959,
     "latitude": 1.34027,
@@ -73,8 +73,8 @@
   },
   {
     "id": 7,
+    "departmentId": 1,
     "name": "Camera 7",
-    "department": "Security",
     "status": "Lost Connection",
     "longitude": 103.911959,
     "latitude": 1.35027,
@@ -85,8 +85,8 @@
   },
   {
     "id": 8,
+    "departmentId": 3,
     "name": "Camera 8",
-    "department": "Surveillance",
     "status": "Under Deployment",
     "longitude": 103.921959,
     "latitude": 1.36027,
@@ -97,8 +97,8 @@
   },
   {
     "id": 9,
+    "departmentId": 3,
     "name": "Camera 9",
-    "department": "Security",
     "status": "Active",
     "longitude": 103.931959,
     "latitude": 1.37027,
@@ -109,8 +109,8 @@
   },
   {
     "id": 10,
+    "departmentId": 2,
     "name": "Camera 10",
-    "department": "Traffic",
     "status": "Under Deployment",
     "longitude": 103.941959,
     "latitude": 1.38027,

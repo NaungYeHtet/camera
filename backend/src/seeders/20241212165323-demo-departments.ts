@@ -9,16 +9,19 @@ module.exports = {
     sequelize: Sequelize
   ): Promise<void> {
     const cameraData = JSON.parse(
-      fs.readFileSync(path.join(__dirname, "./data/cameraData.json"), "utf8")
+      fs.readFileSync(
+        path.join(__dirname, "./data/departmentData.json"),
+        "utf8"
+      )
     );
 
-    await queryInterface.bulkInsert("Cameras", cameraData);
+    await queryInterface.bulkInsert("Departments", cameraData);
   },
 
   async down(
     queryInterface: QueryInterface,
     sequelize: Sequelize
   ): Promise<void> {
-    await queryInterface.bulkDelete("Cameras", {}, {});
+    await queryInterface.bulkDelete("Departments", {}, {});
   },
 };

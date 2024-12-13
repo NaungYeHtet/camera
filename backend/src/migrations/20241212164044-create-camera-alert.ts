@@ -1,12 +1,9 @@
-import { QueryInterface, Sequelize, DataTypes } from "sequelize";
+import { DataTypes, QueryInterface, Sequelize } from "sequelize";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(
-    queryInterface: QueryInterface,
-    sequelize: Sequelize
-  ): Promise<void> {
-    await queryInterface.createTable("CameraGroupMaps", {
+  async up(queryInterface: QueryInterface, sequelize: Sequelize) {
+    await queryInterface.createTable("CameraAlerts", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,8 +13,8 @@ module.exports = {
       cameraId: {
         type: DataTypes.INTEGER,
       },
-      groupId: {
-        type: DataTypes.INTEGER,
+      time: {
+        type: DataTypes.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -29,11 +26,7 @@ module.exports = {
       },
     });
   },
-
-  async down(
-    queryInterface: QueryInterface,
-    sequelize: Sequelize
-  ): Promise<void> {
-    await queryInterface.dropTable("CameraGroupMaps");
+  async down(queryInterface: QueryInterface, sequelize: Sequelize) {
+    await queryInterface.dropTable("CameraAlerts");
   },
 };
